@@ -1,24 +1,38 @@
-//8
+12-
 
-Actuellement, notre composant nous permettant d'afficher la liste des cryptos est plutôt moche. Nous allons la rendre plus belles et afficher les images correspondantes pour chaque monnaie.
+Commencons par améliorer notre page <Fichier name="Info.jsx"/> pour la rendre plus belle et utilisons les données importer par notre API. Identifions quelle valeur nous est retournée.
 
-Créons un nouveau composant que nous nommerons <Fichier name="ImageBlock"/>. Ce composant permettra d'afficher les images et les noms de nos Cryptos.
+```jsx:./src/Infos.jsx
+import React from "react"
+import { useParams } from "react-router-dom"
+import useGetImages from "./hooks/useGetImages"
 
-```jsx:ImageBlock.jsx
-const ImageBlock = ({ children, crypto }) => {
-    return (
-        <button className="imageWrapper">
-            <img src={crypto.link} alt={crypto.currency_long}/>
-            {children}
-        </button>
-    );
-};
-  
-export default ImageBlock;
-```
+const Infos = () => {
+  const { id } = useParams()
+  const [status, cryptos] = useGetImages(id)
+  console.log(id, status, cryptos)
+  return status === "loaded" ? (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "2rem",
+      }}
+    >
+      <img src={cryptos[0].link} alt={cryptos[0].currency_long} />
+      <div style={{ paddingLeft: "1rem" }}>
+        <p>
+          Nom long: <b>{cryptos[0].currency_long}</b>
+        </p>
+        <p>
+          Code: <b>{cryptos[0].currency_code}</b>
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div>Chargement...</div>
+  )
+}
 
-Modifier notre fichier <Fichier name="Crypto.jsx"/>, et rajoutons d'autres tags html. Ne pas oublier de donner une valeur à Key pour aider React à identifier chaque ligne individuellement.
-
-```jsx:Crypto.jsx
-
+export default Infos
 ```
