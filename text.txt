@@ -1,2 +1,2 @@
-Commencons par le fichier <Fichier name="Infos.jsx/> qui devient le fichier <Fichier name="Infos.tsx"/>.
+Commencons par le fichier <Fichier name="App.jsx/> qui devient le fichier <Fichier name="Infos.tsx"/>.
 
