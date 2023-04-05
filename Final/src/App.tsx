@@ -1,10 +1,10 @@
-import { createRoot } from "react-dom/client"
-import { useState } from "react"
-import SearchFields from "./components/SearchFields"
-import Crypto from "./components/Crypto"
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
-import Infos from "./Infos"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { createRoot } from "react-dom/client";
+import { useState } from "react";
+import SearchFields from "./components/SearchFields";
+import Crypto from "./components/Crypto";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Infos from "./Infos";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,10 +13,10 @@ const queryClient = new QueryClient({
       cacheTime: Infinity,
     },
   },
-})
+});
 
 const App = () => {
-  const [searchValue, setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState("");
   return (
     <div className="container">
       <BrowserRouter>
@@ -30,7 +30,10 @@ const App = () => {
             path="/"
             element={
               <>
-                <SearchFields searchValue={searchValue} setSearchValue={setSearchValue} />
+                <SearchFields
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                />
                 <Crypto searchValue={searchValue} />
               </>
             }
@@ -38,13 +41,13 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </div>
-  )
-}
+  );
+};
 
-const container = document.getElementById("app")
-const root = createRoot(container)
+const container = document.getElementById("app")!;
+const root = createRoot(container);
 root.render(
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>
-)
+);

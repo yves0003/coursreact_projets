@@ -1,12 +1,12 @@
-import React from "react"
-import { useParams } from "react-router-dom"
-import useGetImages from "./hooks/useGetImages"
+import React from "react";
+import { useParams } from "react-router-dom";
+import useGetImages from "./hooks/useGetImages";
 
 const Infos = () => {
-  const { id } = useParams()
-  const results = useGetImages(id)
+  const { id } = useParams();
+  const results = useGetImages(id || "");
   return !results.isLoading ? (
-    results.data.length > 0 ? (
+    results.data && results.data.length > 0 ? (
       <div
         style={{
           display: "flex",
@@ -40,7 +40,7 @@ const Infos = () => {
     )
   ) : (
     <div>Chargement...</div>
-  )
-}
+  );
+};
 
-export default Infos
+export default Infos;

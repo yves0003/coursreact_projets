@@ -1,8 +1,8 @@
 export default function filterfunc(filter) {
-  return function (image) {
+  return function (code) {
     return (
-      image.currency_code.toLowerCase().includes(filter.toLowerCase()) ||
-      image.currency_long.toLowerCase().includes(filter.toLowerCase())
+      code.currency_code.toLowerCase().includes(filter.toLowerCase()) ||
+      code.currency_long.toLowerCase().includes(filter.toLowerCase())
     )
   }
 }

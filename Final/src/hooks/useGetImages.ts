@@ -1,9 +1,8 @@
-//ts-check
 import { useQuery } from "@tanstack/react-query";
 import getImagesApi from "../helpers/getImagesApi";
 
-export const useGetImages = (filter) => {
-  return useQuery({
+const useGetImages = (filter: string) => {
+  return useQuery<CryptoType[]>({
     queryKey: ["imageData"],
     queryFn: getImagesApi,
     select: (images) =>
@@ -14,3 +13,4 @@ export const useGetImages = (filter) => {
       ),
   });
 };
+export default useGetImages;

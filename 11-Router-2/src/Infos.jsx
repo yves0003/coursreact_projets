@@ -4,9 +4,9 @@ import useGetImages from "./hooks/useGetImages"
 
 const Infos = () => {
   const { id } = useParams()
-  const results = useGetImages(id)
-  return !results.isLoading ? (
-    results.data.length > 0 ? (
+  const [status, cryptos] = useGetImages(id)
+  return status === "loaded" ? (
+    cryptos[0] ? (
       <div
         style={{
           display: "flex",
@@ -24,13 +24,13 @@ const Infos = () => {
             backgroundColor: "#F2F2F2",
           }}
         >
-          <img src={results.data[0].link} alt={results.data[0].currency_long} />
+          <img src={cryptos[0].link} alt={cryptos[0].currency_long} />
           <div style={{ paddingLeft: "1rem" }}>
             <p>
-              Nom: <b>{results.data[0].currency_long}</b>
+              Nom: <b>{cryptos[0].currency_long}</b>
             </p>
             <p>
-              Code: <b>{results.data[0].currency_code}</b>
+              Code: <b>{cryptos[0].currency_code}</b>
             </p>
           </div>
         </div>

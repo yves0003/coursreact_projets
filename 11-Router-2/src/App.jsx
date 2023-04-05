@@ -4,16 +4,6 @@ import SearchFields from "./components/SearchFields"
 import Crypto from "./components/Crypto"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Infos from "./Infos"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-// Create a client
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    },
-  },
-})
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("")
@@ -43,8 +33,4 @@ const App = () => {
 
 const container = document.getElementById("app")
 const root = createRoot(container)
-root.render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>
-)
+root.render(<App />)

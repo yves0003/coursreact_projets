@@ -1,28 +1,16 @@
-import { useEffect, useState } from "react"
-import filterfunc from "../helpers/filterfunc"
+import { useQuery } from "@tanstack/react-query"
+import getImagesApi from "../helpers/getImagesApi"
 
-let localCache = []
-
-const useGetImages = (filter = "") => {
-  const [cryptos, setCrypto] = useState([])
-  const [status, setStatus] = useState("unloaded")
-  useEffect(() => {
-    if (localCache.length === 0) {
-      requestImages()
-    } else if (localCache.length > 0) {
-      setCrypto(localCache.filter(filterfunc(filter)))
-      setStatus("loaded")
-    }
-    // eslint-disable-line react-hooks/exhaustive-deps
-    async function requestImages() {
-      const apiRep = await fetch("https://mongodb-image-api.vercel.app/api/listCryptoLogo")
-      const json = await apiRep.json()
-      setCrypto(json.filter(filterfunc(filter)))
-      localCache = json || []
-      setStatus("loaded")
-    }
-  }, [filter])
-  return [status, cryptos]
+const useGetImages = filter => {
+  return useQuery({
+    queryKey: ["imageData"],
+    queryFn: getImagesApi,
+    select: images =>
+      images.filter(
+        image =>
+          image.currency_code.toLowerCase().includes(filter.toLowerCase()) ||
+          image.currency_long.toLowerCase().includes(filter.toLowerCase())
+      ),
+  })
 }
-
 export default useGetImages
