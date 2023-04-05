@@ -18,7 +18,7 @@ const Crypto: FC<{ searchValue: string }> = ({ searchValue }) => {
             <ImageBlock crypto={crypto} />
           </Link>
         ))}
-      {!results.isLoading && results.data && <div>Aucune Donnée</div>}
+      {!results.isLoading && !results.data && <div>Aucune Donnée</div>}
     </div>
   );
 };
